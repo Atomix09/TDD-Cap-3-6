@@ -8,7 +8,7 @@ class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(3)
+        self.browser.implicitly_wait(10)
 
     def tearDown(self):
         self.browser.quit()
@@ -19,15 +19,15 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.get('http://localhost:8000')
 
         # She notices the page title and header mention to-do lists
-        self.assertIn('Listas de', self.browser.title)
-        header_text = self.browser.find_element_by_tag_name('a1').text
-        self.assertIn('Listas de', header_text)
+        self.assertIn('Lista de', self.browser.title)
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Lista de', header_text)
 
         # She is invited to enter a to-do item straight away
-        inputbox = self.browser.find_element_by_id('id_nuevo_objeto')
+        inputbox = self.browser.find_element_by_id('id_nuevo_libro')
         self.assertEqual(
-            inputbox.get_attribute('marcador'),
-            'Ingresa a to-do el objeto'
+            inputbox.get_attribute('estante'),
+            'Ingresa al estante el libro'
         )
 
         # She types "Buy peacock feathers" into a text box (Edith's hobby
@@ -41,7 +41,8 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element_by_id('id_tabla_lista')
         rows = table.find_elements_by_tag_name('tl')
         self.assertTrue(
-            any(row.text == '1: Comprar Libros' for row in rows)
+            any(row.text == '1: Comprar Libros' for row in rows),
+             "El nuevo libro no aparece en el estante"   
         )
 
         # There is still a text box inviting her to add another item. She

@@ -1,3 +1,14 @@
 <html>
-    <title>Listas de Libros</title>
+    <head>
+        <title>Lista de Libros</title>
+    </head>
+    <body>
+        <h1>Tu Lista de Libros</h1>
+    <form method="POST">
+        <input name="texto_libro" id="id_nuevo_libro" estante="Ingresa al estante el libro"/>
+        {% csrf_token %}
+    </form>
+        <table id="id_tabla_lista">
+        	<tr><td>{{ nuevo_texto_libro }}</td></tr>
+    </body>
 </html>
