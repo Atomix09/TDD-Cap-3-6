@@ -1,5 +1,5 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 # Create your views here.
 def pagina_inicio(request):
-    return HttpResponse('<html><title>Listas de Tareas</title></html>')
+    return render(request, 'Inicio.html')
